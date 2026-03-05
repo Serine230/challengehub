@@ -1,0 +1,18 @@
+Options -Indexes
+
+# Prevent direct access to sensitive files
+<FilesMatch "\.(php)$">
+    <If "%{REQUEST_URI} =~ /config/">
+        Require all denied
+    </If>
+</FilesMatch>
+
+# Rewrite rules (optional, for cleaner URLs)
+RewriteEngine On
+
+# Block access to config directory
+RewriteRule ^config/ - [F,L]
+
+# Force trailing slash handling
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
