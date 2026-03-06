@@ -52,6 +52,10 @@ Open your browser: `http://localhost/challengehub/`
 ## 📁 Project Structure
 ```
 challengehub/
+├── admin/
+│   └── dashboard.php              
+├── ajax/
+│   └── get_notifications.php      
 ├── app/
 │   ├── controllers/
 │   │   ├── AuthController.php
@@ -63,13 +67,15 @@ challengehub/
 │   │   ├── Challenge.php
 │   │   ├── Submission.php
 │   │   ├── Comment.php
-│   │   └── Vote.php
+│   │   ├── Vote.php
+│   │   ├── Badge.php              
+│   │   └── Notification.php       
 │   └── views/
-│       ├── auth/        (login, register)
-│       ├── challenges/  (index, show, create, edit)
-│       ├── submissions/ (show, edit)
-│       ├── profile/     (show, edit)
-│       ├── partials/    (header, footer)
+│       ├── auth/
+│       ├── challenges/
+│       ├── submissions/
+│       ├── profile/
+│       ├── partials/
 │       ├── home.php
 │       └── leaderboard.php
 ├── config/
@@ -79,10 +85,9 @@ challengehub/
 │   ├── css/main.css
 │   ├── js/main.js
 │   └── images/uploads/
-├── index.php           ← Main router
+├── index.php
 ├── .htaccess
 └── challengehub_database.sql
-```
 
 ---
 
