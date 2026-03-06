@@ -66,6 +66,47 @@ CREATE TABLE IF NOT EXISTS `votes` (
   UNIQUE KEY `unique_vote` (`submission_id`, `user_id`),
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+-- ==================== TABLE BADGES ====================
+
+CREATE TABLE badges (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(100) NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    icone VARCHAR(10) NOT NULL,
+    condition_type VARCHAR(50) NOT NULL
+);
+
+-- ==================== TABLE USER_BADGES ====================
+
+CREATE TABLE user_badges (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    badge_id INT NOT NULL,
+    date_obtenu DATETIME DEFAULT NOW(),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (badge_id) REFERENCES badges(id) ON DELETE CASCADE,
+    UNIQUE KEY unique_user_badge (user_id, badge_id)
+);
+
+-- ==================== TABLE NOTIFICATIONS ====================
+
+CREATE TABLE notifications (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    message VARCHAR(255) NOT NULL,
+    lu TINYINT(1) DEFAULT 0,
+    date_creation DATETIME DEFAULT NOW(),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- ==================== INSERTION DES BADGES ====================
+
+INSERT INTO badges (nom, description, icone, condition_type) VALUES
+('Débutant',  'Première soumission effectuée',     '🥉', 'submissions'),
+('Actif',     '5 soumissions effectuées',           '🥈', 'submissions'),
+('Expert',    '10 soumissions effectuées',          '🥇', 'submissions'),
+('Votant',    '10 votes donnés à la communauté',    '👍', 'votes'),
+('Champion',  'Gagner un challenge (top vote)',     '🏆', 'challenges');
 
 -- ════════════════════════════════════════════════════════════
 -- SEED DATA — 3 E-Commerce Challenges (as required)
